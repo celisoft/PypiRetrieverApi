@@ -3,7 +3,7 @@
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
 from dataclasses_serialization.json import JSONSerializer
-from flask import Flask, request
+from flask import Flask, request, Response
 from typing import List
 
 import urllib.request
@@ -64,10 +64,8 @@ def get_lib(lib_name):
 
 	lib_versions = PypiRetriever.get_versions(lib_name)	
 	lib = LibraryData(name=lib_name, versions=lib_versions, counter=len(lib_versions))
-	
-	print("Found %i %s versions" % (len(lib_versions), lib_name))
-	
-	return JSONSerializer.serialize(lib)
+
+	return Response(JSONSerializer.serialize(lib), mimetype="application/json");
 
 
 if __name__ == '__main__':
