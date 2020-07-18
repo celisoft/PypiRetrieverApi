@@ -65,7 +65,7 @@ def get_lib(lib_name):
 	lib_versions = PypiRetriever.get_versions(lib_name)	
 	lib = LibraryData(name=lib_name, versions=lib_versions, counter=len(lib_versions))
 
-	return Response(JSONSerializer.serialize(lib), mimetype="application/json");
+	return JSONSerializer.serialize(lib);
 
 
 if __name__ == '__main__':
