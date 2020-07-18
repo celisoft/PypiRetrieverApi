@@ -32,7 +32,7 @@ class PypiRetriever():
 			# Get only the tar.gz files, no whl wanted
 			if ahref.text.endswith("gz"):
 				# Remove the last 7 chars (.tar.gz) and split on "-" to get the version number only
-				version_id = ahref.text[:-7].split("-")[1]
+				version_id = ahref.text[:-7].split("-")[-1]
 
 				lib_versions.append(version_id)
 		return lib_versions
@@ -71,4 +71,4 @@ def get_lib(lib_name):
 
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0')
+	flask_app.run(host='0.0.0.0')
