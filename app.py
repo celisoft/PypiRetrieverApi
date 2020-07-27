@@ -44,6 +44,7 @@ class LibraryData():
 	Class that represents a library on PyPI with its different versions.
 	"""
 	name: str
+	latest: str
 	versions: List[str]
 	counter: int = 0
 
@@ -56,14 +57,16 @@ def get_lib(lib_name):
 	"""
 	Goal is to generate a json like: 
 	{
-	  "library":"flask",
-	  "count":34
+	  "name":"flask",
+	  "latest":"X.Y.Z",
+	  "count":34,
 	  "versions": [...]
 	}
 	"""
 
 	lib_versions = PypiRetriever.get_versions(lib_name)	
-	lib = LibraryData(name=lib_name, versions=lib_versions, counter=len(lib_versions))
+	lib = LibraryData(name=lib_name, latest=lib_versions[-1] ,versions=lib_versions, 
+		counter=len(lib_versions))
 
 	return JSONSerializer.serialize(lib);
 
